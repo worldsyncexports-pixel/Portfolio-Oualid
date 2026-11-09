@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bachir Cherif Oualid | Industrial, Aeronautical & UAV Engineer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tactical: {
+                            base: '#080C14',
+                            card: '#0F172A',
+                            panel: '#1E293B',
+                            border: '#334155',
+                            accent: '#06B6D4',
+                            amber: '#F59E0B',
+                            gold: '#D97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080C14;
+            color: #F8FAFC;
+        }
+        .hud-grid {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(6, 182, 212, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+        }
+        .tactical-glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.7);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+        }
+        .glow-amber {
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+        }
+        .tab-btn.active {
+            border-color: #06B6D4;
+            color: #06B6D4;
+            background-color: rgba(6, 182, 212, 0.12);
+            box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.3);
+        }
+    </style>
+</head>
+<body class="hud-grid selection:bg-cyan-500 selection:text-slate-950 min-h-screen flex flex-col">
+
+    <!-- Top Tactical Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 tactical-glass border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Engineering Designation -->
+                <a href="#hero" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded bg-gradient-to-br from-cyan-500 to-amber-500 p-[1px] group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-slate-950 rounded flex items-center justify-center">
+                            <i class="fa-solid fa-crosshairs text-cyan-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-base font-extrabold tracking-tight text-white block leading-none font-mono">BACHIR CHERIF OUALID</span>
+                        <span class="text-[10px] font-mono text-amber-400 tracking-wider mt-1 block uppercase">Industrial · Aeronautical · UAV Engineer</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-7 text-xs font-mono">
+                    <a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors uppercase tracking-wide">Overview</a>
+                    <a href="#expertise" class="text-slate-300 hover:text-cyan-400 transition-colors uppercase tracking-wide">Specialized Disciplines</a>
+                    <a href="#blueprint" class="text-slate-300 hover:text-cyan-400 transition-colors uppercase tracking-wide">Tech Blueprint</a>
+                    <a href="#services" class="text-slate-300 hover:text-cyan-400 transition-colors uppercase tracking-wide">Service Offerings</a>
+                    <a href="#estimator" class="text-slate-300 hover:text-amber-400 transition-colors uppercase tracking-wide">B2B Estimator</a>
+                    <a href="#contact" class="px-4 py-2 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition-all shadow-lg shadow-cyan-500/20">INITIATE CONSULTATION</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-slate-300 hover:text-white p-2" aria-label="Toggle Navigation">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-3 font-mono text-xs">
+            <a href="#about" class="block px-3 py-2 rounded text-slate-200 hover:bg-slate-800">OVERVIEW</a>
+            <a href="#expertise" class="block px-3 py-2 rounded text-slate-200 hover:bg-slate-800">SPECIALIZED DISCIPLINES</a>
+            <a href="#blueprint" class="block px-3 py-2 rounded text-slate-200 hover:bg-slate-800">TECH BLUEPRINT</a>
+            <a href="#services" class="block px-3 py-2 rounded text-slate-200 hover:bg-slate-800">SERVICE OFFERINGS</a>
+            <a href="#estimator" class="block px-3 py-2 rounded text-slate-200 hover:bg-slate-800">B2B ESTIMATOR</a>
+            <a href="#contact" class="block px-3 py-2.5 rounded bg-cyan-500 text-slate-950 font-bold text-center">INITIATE CONSULTATION</a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative py-20 lg:py-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            <span>AVAILABLE FOR HIGH-RELIABILITY & DEFENSE CONSULTING</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                            Bachir Cherif <br class="hidden sm:inline">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-amber-400">Oualid</span>
+                        </h1>
+                        
+                        <p class="text-lg sm:text-xl text-slate-300 font-semibold max-w-2xl font-mono">
+                            Industrial Maintenance, Aeronautical Structures & Autonomous UAV Systems Engineer
+                        </p>
+                        
+                        <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">
+                            Combining 8+ years of industrial reliability methods (Nestlé Waters Algeria, SPA PTD, Vertex Prime Consulting), ESTA Alger structural aeronautics degree, Su-30MKA defense aviation maintenance qualifications, and custom flight control & radar integration on unmanned aerial platforms ("5 Juillet" Drone Project).
+                        </p>
+
+                        <!-- Key Stats Badges -->
+                        <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
+                            <span class="px-3 py-1.5 rounded bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-gears text-cyan-400 mr-1.5"></i>8+ Yrs Reliability & TPM</span>
+                            <span class="px-3 py-1.5 rounded bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-plane text-amber-400 mr-1.5"></i>Su-30MKA Qualification</span>
+                            <span class="px-3 py-1.5 rounded bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-microchip text-cyan-400 mr-1.5"></i>UAV Radar & Control</span>
+                            <span class="px-3 py-1.5 rounded bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-language text-amber-400 mr-1.5"></i>French · Arabic · English</span>
+                        </div>
+
+                        <!-- CTA Actions -->
+                        <div class="pt-4 flex flex-col sm:flex-row gap-4">
+                            <a href="#expertise" class="inline-flex items-center justify-center px-6 py-3.5 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold font-mono text-xs uppercase tracking-wider transition-all glow-cyan">
+                                <i class="fa-solid fa-compass mr-2"></i> Explore Specialized Disciplines
+                            </a>
+                            <a href="#estimator" class="inline-flex items-center justify-center px-6 py-3.5 rounded bg-slate-900 hover:bg-slate-800 text-white font-semibold font-mono text-xs uppercase tracking-wider border border-slate-700 transition-all glow-amber">
+                                <i class="fa-solid fa-calculator mr-2 text-amber-400"></i> B2B Service Cost Estimator
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Visual HUD Panel -->
+                    <div class="lg:col-span-5">
+                        <div class="tactical-glass p-6 sm:p-8 rounded-xl border border-slate-700 shadow-2xl relative">
+                            
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
+                                    <span class="text-xs font-mono text-slate-300 uppercase tracking-widest">TECHNICAL SPECIFICATION BRIEF</span>
+                                </div>
+                                <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">TARGET: 250k DZD/MO</span>
+                            </div>
+
+                            <div class="space-y-4 font-mono text-xs">
+                                
+                                <div class="p-3.5 rounded bg-slate-950/80 border border-slate-800 flex items-start space-x-3">
+                                    <i class="fa-solid fa-industry text-cyan-400 text-base mt-0.5"></i>
+                                    <div>
+                                        <span class="text-slate-200 font-bold block">Industrial Systems Optimization</span>
+                                        <span class="text-slate-400 text-[11px] block mt-0.5">TPM, MTBF, MTTR, TRS/OEE indicators, GMAO/CMMS setup & FSSC 22000 standard audits.</span>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded bg-slate-950/80 border border-slate-800 flex items-start space-x-3">
+                                    <i class="fa-solid fa-drone text-amber-400 text-base mt-0.5"></i>
+                                    <div>
+                                        <span class="text-slate-200 font-bold block">UAV Command & Radar Integration</span>
+                                        <span class="text-slate-400 text-[11px] block mt-0.5">Flight control parameter programming, takeoff/landing profiles, and radar payload installation.</span>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded bg-slate-950/80 border border-slate-800 flex items-start space-x-3">
+                                    <i class="fa-solid fa-plane-up text-cyan-400 text-base mt-0.5"></i>
+                                    <div>
+                                        <span class="text-slate-200 font-bold block">Military Aviation Maintenance Rigor</span>
+                                        <span class="text-slate-400 text-[11px] block mt-0.5">Su-30MKA maintenance discipline, procedural safety, airframe structural integrity support.</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                                <span><i class="fa-solid fa-location-dot text-cyan-400 mr-1"></i> Location: Algeria / Remote</span>
+                                <span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> B2B Ready</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Experience & Track Record -->
+        <section id="about" class="py-16 bg-slate-950/80 border-y border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="text-cyan-400 font-mono text-xs uppercase tracking-widest">EXECUTIVE SUMMARY</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Cross-Sector Operational Reliability</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Engineered for high-stakes operational environments. Blending 8+ years of industrial preventive maintenance, methods, and reliability engineering with aerospace airframe structural precision and autonomous drone integration.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono">
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                                <i class="fa-solid fa-bottle-water text-xl text-cyan-400 mb-2"></i>
+                                <h3 class="text-xs font-bold text-white uppercase">Nestlé Waters Algeria</h3>
+                                <p class="text-[11px] text-slate-400 mt-1">Maintenance planning, methods & food safety environments (FSSC 22000).</p>
+                            </div>
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                                <i class="fa-solid fa-industry text-xl text-amber-400 mb-2"></i>
+                                <h3 class="text-xs font-bold text-white uppercase">SPA PTD</h3>
+                                <p class="text-[11px] text-slate-400 mt-1">Preventive intervention preparation, line troubleshooting & TRS/OEE tracking.</p>
+                            </div>
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                                <i class="fa-solid fa-briefcase text-xl text-cyan-400 mb-2"></i>
+                                <h3 class="text-xs font-bold text-white uppercase">Vertex Prime Consulting</h3>
+                                <p class="text-[11px] text-slate-400 mt-1">Technical audits, CMMS/GMAO structuring & supplier proposal evaluations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Specialized Expertise Tabs -->
+        <section id="expertise" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-amber-400 font-mono text-xs uppercase tracking-widest">ENGINEERING DISCIPLINES</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-2">Specialized Capabilities Matrix</h2>
+                    <p class="text-slate-400 text-sm mt-2">Filter across core technical disciplines to evaluate specific operational methods.</p>
+                    
+                    <!-- Tab Buttons -->
+                    <div class="flex flex-wrap justify-center gap-2 mt-8 font-mono text-xs">
+                        <button onclick="filterDomain('all')" class="tab-btn active px-4 py-2.5 rounded border border-slate-700 text-slate-300 transition-all uppercase">
+                            All Disciplines
+                        </button>
+                        <button onclick="filterDomain('industrial')" class="tab-btn px-4 py-2.5 rounded border border-slate-700 text-slate-300 transition-all uppercase">
+                            Industrial & CMMS
+                        </button>
+                        <button onclick="filterDomain('uav')" class="tab-btn px-4 py-2.5 rounded border border-slate-700 text-slate-300 transition-all uppercase">
+                            UAV & Embedded Radar
+                        </button>
+                        <button onclick="filterDomain('military')" class="tab-btn px-4 py-2.5 rounded border border-slate-700 text-slate-300 transition-all uppercase">
+                            Military Aviation (Su-30MKA)
+                        </button>
+                        <button onclick="filterDomain('pm')" class="tab-btn px-4 py-2.5 rounded border border-slate-700 text-slate-300 transition-all uppercase">
+                            Project Management & Procurement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Expertise Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="expertise-container">
+
+                    <!-- Card 1: Industrial Maintenance & CMMS -->
+                    <div class="domain-card industrial p-6 rounded-xl tactical-glass border border-slate-800 hover:border-cyan-500/50 transition-all">
+                        <div class="w-12 h-12 rounded bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">Industrial Reliability</span>
+                        <h3 class="text-lg font-bold text-white mt-1">TPM & Reliability KPIs</h3>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Setup and tracking of TPM methodologies, MTBF, MTTR, and TRS/OEE metrics to optimize production line uptime and lower operational expenditure.
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Custom GMAO/CMMS -->
+                    <div class="domain-card industrial p-6 rounded-xl tactical-glass border border-slate-800 hover:border-cyan-500/50 transition-all">
+                        <div class="w-12 h-12 rounded bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">CMMS Solutions</span>
+                        <h3 class="text-lg font-bold text-white mt-1">GMAO Software Structuring</h3>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Deployment of structured CMMS solutions, spare-parts identification, preventive plan generation, and SAP Business One system alignment.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Drone Design & Flight Logic -->
+                    <div class="domain-card uav p-6 rounded-xl tactical-glass border border-slate-800 hover:border-amber-500/50 transition-all">
+                        <div class="w-12 h-12 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-4">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest">"5 Juillet" Drone Project</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Flight Control & Parameters</h3>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Programmed command and control system logic, takeoff and landing parameter tuning, and flight stabilization dynamics on functional platforms.
+                        </p>
+                    </div>
+
+                    <!-- Card 4: Radar & Payload Integration -->
+                    <div class="domain-card uav p-6 rounded-xl tactical-glass border border-slate-800 hover:border-amber-500/50 transition-all">
+                        <div class="w-12 h-12 rounded bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-4">
+                            <i class="fa-solid fa-radar"></i>
+                        </div>
+                        <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest">Unmanned Systems</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Radar & Sensor Integration</h3>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Physical and electronic mounting of radar systems on unmanned aerial platforms, payload wiring, telemetry feedback, and operational testing.
+                        </p>
+                    </div>
+
+                    <!-- Card 5: Su-30MKA & Aviation Structures -->
+                    <div class="domain-card military p-6 rounded-xl tactical-glass border border-slate-800 hover:border-cyan-500/50 transition-all">
+                        <div class="w-12 h-12 rounded bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">Defense Aviation</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Su-30MKA Maintenance Standards</h3>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Qualifications in full Su-30MKA maintenance operations and flight skills, backed by ESTA Alger Aeronautical Structures Degree principles.
+                        </p>
+                    </div>
+
+                    <!-- Card 6: Project Management & Procurement -->
+                    <div class="domain-card pm p-6 rounded-xl tactical-glass border border-slate-800 hover:border-cyan-500/50 transition-all">
+                        <div class="w-12 h-12 rounded bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">Project Execution</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Cahier des Charges & Procurement</h3>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Technical offer evaluation against Cahier des Charges specifications, supplier negotiation support, milestone sequencing, and commissioning punch-lists.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical Tooling & Standards Blueprint Matrix -->
+        <section id="blueprint" class="py-20 bg-slate-950/90 border-y border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left: CAD / GMAO Code Preview Box -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest">TECHNICAL SPECIFICATION BLUEPRINT</span>
+                        <h2 class="text-3xl font-extrabold text-white">Digital Tools & Technical Stack</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Structured data modeling for maintenance, CAD airframe drafting, and telemetry loop parameters.
+                        </p>
+
+                        <!-- Code Preview Terminal Window -->
+                        <div class="rounded-lg bg-slate-950 border border-slate-800 overflow-hidden font-mono text-xs shadow-2xl">
+                            <div class="bg-slate-900/90 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between text-slate-400">
+                                <span class="text-[11px]"><i class="fa-solid fa-terminal text-cyan-400 mr-2"></i>uav_radar_telemetry_config.json</span>
+                                <div class="flex space-x-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                                </div>
+                            </div>
+                            <div class="p-4 space-y-1 text-slate-300 overflow-x-auto">
+                                <div><span class="text-purple-400">{</span></div>
+                                <div class="pl-4"><span class="text-cyan-400">"project"</span>: <span class="text-emerald-300">"5 Juillet UAV - Command Integration"</span>,</div>
+                                <div class="pl-4"><span class="text-cyan-400">"lead_engineer"</span>: <span class="text-emerald-300">"Bachir Cherif Oualid"</span>,</div>
+                                <div class="pl-4"><span class="text-cyan-400">"aero_degree"</span>: <span class="text-emerald-300">"ESTA Alger Structural Engineering"</span>,</div>
+                                <div class="pl-4"><span class="text-cyan-400">"military_qualification"</span>: <span class="text-emerald-300">"Su-30MKA Full Maintenance"</span>,</div>
+                                <div class="pl-4"><span class="text-cyan-400">"flight_parameters"</span>: <span class="text-purple-400">{</span></div>
+                                <div class="pl-8"><span class="text-amber-400">"auto_takeoff"</span>: <span class="text-cyan-300">true</span>,</div>
+                                <div class="pl-8"><span class="text-amber-400">"auto_landing"</span>: <span class="text-cyan-300">true</span>,</div>
+                                <div class="pl-8"><span class="text-amber-400">"radar_payload_status"</span>: <span class="text-emerald-300">"Functional / Calibrated"</span></div>
+                                <div class="pl-4"><span class="text-purple-400">}</span>,</div>
+                                <div class="pl-4"><span class="text-cyan-400">"gmao_cmms_stack"</span>: [<span class="text-emerald-300">"SAP Business One"</span>, <span class="text-emerald-300">"AutoCAD"</span>, <span class="text-emerald-300">"SketchUp"</span>, <span class="text-emerald-300">"Excel GMAO"</span>]</div>
+                                <div><span class="text-purple-400">}</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Technical Stack Matrix -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+                            
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800">
+                                <h4 class="text-cyan-400 font-bold uppercase mb-2"><i class="fa-solid fa-sliders mr-2"></i>Industrial Reliability</h4>
+                                <ul class="space-y-1.5 text-slate-300">
+                                    <li class="flex items-center justify-between"><span>TPM & TRS/OEE</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>MTBF & MTTR Metrics</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>SOP / OPL Generation</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>GMAO Structuring</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                </ul>
+                            </div>
+
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800">
+                                <h4 class="text-amber-400 font-bold uppercase mb-2"><i class="fa-solid fa-microchip mr-2"></i>Digital & CAD Stack</h4>
+                                <ul class="space-y-1.5 text-slate-300">
+                                    <li class="flex items-center justify-between"><span>SAP Business One</span> <i class="fa-solid fa-check text-amber-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>AutoCAD 2D/3D</span> <i class="fa-solid fa-check text-amber-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>SketchUp CAD</span> <i class="fa-solid fa-check text-amber-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>Excel CMMS Engines</span> <i class="fa-solid fa-check text-amber-400"></i></li>
+                                </ul>
+                            </div>
+
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800">
+                                <h4 class="text-cyan-400 font-bold uppercase mb-2"><i class="fa-solid fa-shield-cat mr-2"></i>Quality Norms</h4>
+                                <ul class="space-y-1.5 text-slate-300">
+                                    <li class="flex items-center justify-between"><span>ISO 9001 Environments</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>FSSC 22000 Food Safety</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>Su-30MKA MRO Safety</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                    <li class="flex items-center justify-between"><span>Technical Auditing</span> <i class="fa-solid fa-check text-cyan-400"></i></li>
+                                </ul>
+                            </div>
+
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800">
+                                <h4 class="text-amber-400 font-bold uppercase mb-2"><i class="fa-solid fa-globe mr-2"></i>Languages</h4>
+                                <ul class="space-y-1.5 text-slate-300">
+                                    <li class="flex items-center justify-between"><span>French</span> <span class="text-amber-400">Fluent</span></li>
+                                    <li class="flex items-center justify-between"><span>Arabic</span> <span class="text-amber-400">Native</span></li>
+                                    <li class="flex items-center justify-between"><span>English</span> <span class="text-amber-400">Professional</span></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Dynamic B2B Service Offerings & Pricing Estimator -->
+        <section id="estimator" class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-12">
+                    <span class="text-cyan-400 font-mono text-xs uppercase tracking-widest">DYNAMIC COST ESTIMATION TOOL</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-2">B2B Service & Budget Estimator</h2>
+                    <p class="text-slate-400 text-sm mt-2">Select target deliverables to estimate scope and monthly baseline budgets in Algerian Dinar (DZD).</p>
+                </div>
+
+                <div class="tactical-glass p-6 sm:p-8 rounded-xl border border-slate-700 shadow-2xl">
+                    <form id="quote-calculator-form" onchange="calculateTotal()">
+                        
+                        <div class="space-y-4 font-mono">
+                            
+                            <!-- Option 1 -->
+                            <label class="flex items-start justify-between p-4 rounded bg-slate-950/80 border border-slate-800 hover:border-slate-700 cursor-pointer transition-all">
+                                <div class="flex items-start space-x-3">
+                                    <input type="checkbox" id="item-audit" class="mt-1 w-4 h-4 rounded text-cyan-500 focus:ring-cyan-400 bg-slate-900 border-slate-700">
+                                    <div>
+                                        <span class="text-sm font-bold text-white block">Industrial Maintenance Technical Audit</span>
+                                        <span class="text-xs text-slate-400 font-sans">Full plant diagnostic, bottleneck identification, preventive plan setup & performance report.</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-cyan-400 font-bold whitespace-nowrap">70,000 DZD</span>
+                            </label>
+
+                            <!-- Option 2 -->
+                            <label class="flex items-start justify-between p-4 rounded bg-slate-950/80 border border-slate-800 hover:border-slate-700 cursor-pointer transition-all">
+                                <div class="flex items-start space-x-3">
+                                    <input type="checkbox" id="item-training" class="mt-1 w-4 h-4 rounded text-cyan-500 focus:ring-cyan-400 bg-slate-900 border-slate-700">
+                                    <div>
+                                        <span class="text-sm font-bold text-white block">Technical Staff Training (Per Day)</span>
+                                        <span class="text-xs text-slate-400 font-sans">Hands-on technician training on TPM indicators, troubleshooting logic, and SOP compliance.</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-cyan-400 font-bold whitespace-nowrap">45,000 DZD</span>
+                            </label>
+
+                            <!-- Option 3 -->
+                            <label class="flex items-start justify-between p-4 rounded bg-slate-950/80 border border-slate-800 hover:border-slate-700 cursor-pointer transition-all">
+                                <div class="flex items-start space-x-3">
+                                    <input type="checkbox" id="item-sop" class="mt-1 w-4 h-4 rounded text-cyan-500 focus:ring-cyan-400 bg-slate-900 border-slate-700">
+                                    <div>
+                                        <span class="text-sm font-bold text-white block">SOP & OPL Template Deliverable Pack</span>
+                                        <span class="text-xs text-slate-400 font-sans">Standard Operating Procedure templates & One-Point Lessons customized for production lines.</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-cyan-400 font-bold whitespace-nowrap">40,000 DZD</span>
+                            </label>
+
+                            <!-- Option 4 -->
+                            <label class="flex items-start justify-between p-4 rounded bg-slate-950/80 border border-slate-800 hover:border-slate-700 cursor-pointer transition-all">
+                                <div class="flex items-start space-x-3">
+                                    <input type="checkbox" id="item-gmao" class="mt-1 w-4 h-4 rounded text-cyan-500 focus:ring-cyan-400 bg-slate-900 border-slate-700">
+                                    <div>
+                                        <span class="text-sm font-bold text-white block">GMAO / CMMS Setup & Monthly Retainer</span>
+                                        <span class="text-xs text-slate-400 font-sans">Excel-based or custom CMMS solution setup, inventory taxonomy, and operational support.</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-cyan-400 font-bold whitespace-nowrap">80,000 DZD</span>
+                            </label>
+
+                            <!-- Option 5 -->
+                            <label class="flex items-start justify-between p-4 rounded bg-slate-950/80 border border-slate-800 hover:border-slate-700 cursor-pointer transition-all">
+                                <div class="flex items-start space-x-3">
+                                    <input type="checkbox" id="item-uav" class="mt-1 w-4 h-4 rounded text-amber-500 focus:ring-amber-400 bg-slate-900 border-slate-700">
+                                    <div>
+                                        <span class="text-sm font-bold text-white block">UAV Command Control & Radar Integration</span>
+                                        <span class="text-xs text-slate-400 font-sans">Flight parameter programming, takeoff/landing logic, and sensor payload integration.</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold whitespace-nowrap">Custom Scope</span>
+                            </label>
+
+                        </div>
+
+                        <!-- Calculation Result Header -->
+                        <div class="mt-6 p-4 rounded bg-slate-950 border border-cyan-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+                            <div>
+                                <span class="text-[11px] text-slate-400 block uppercase">ESTIMATED BENCHMARK PROPOSAL:</span>
+                                <span id="calculated-total" class="text-2xl font-extrabold text-cyan-400">0 DZD</span>
+                                <span class="text-[10px] text-slate-500 block">*Working assumption based on 2026 execution plan. Subject to final agreement.</span>
+                            </div>
+
+                            <button type="button" onclick="transferEstimateToContact()" class="w-full sm:w-auto px-5 py-3 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-cyan-500/20">
+                                Auto-Fill Contact Request <i class="fa-solid fa-arrow-down ml-1"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- B2B Consultation & Contact Form -->
+        <section id="contact" class="py-20 bg-slate-950/90 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="text-cyan-400 font-mono text-xs uppercase tracking-widest">DIRECT B2B ENGAGEMENT</span>
+                        <h2 class="text-3xl font-extrabold text-white">Initiate Technical Consultation</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Available for industrial maintenance audits, long-term plant reliability retainers, military/aerospace technical support roles, and UAV payload integration projects.
+                        </p>
+
+                        <div class="space-y-4 pt-2 font-mono text-xs">
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800 flex items-center space-x-3">
+                                <i class="fa-solid fa-user-gear text-cyan-400 text-lg"></i>
+                                <div>
+                                    <span class="text-slate-400 block text-[10px] uppercase">Engineer</span>
+                                    <span class="text-slate-100 font-bold">Bachir Cherif Oualid</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded bg-slate-900 border border-slate-800 flex items-center space-x-3">
+                                <i class="fa-solid fa-envelope text-amber-400 text-lg"></i>
+                                <div>
+                                    <span class="text-slate-400 block text-[10px] uppercase">Payment Options</span>
+                                    <span class="text-slate-100 font-bold">All standard B2B methods accepted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="tactical-glass p-6 sm:p-8 rounded-xl border border-slate-700 shadow-xl">
+                            
+                            <div id="form-feedback" class="hidden mb-6 p-4 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono">
+                                <i class="fa-solid fa-circle-check mr-2"></i> Request recorded! Bachir Cherif Oualid will follow up via email.
+                            </div>
+
+                            <form id="b2b-contact-form" onsubmit="handleFormSubmit(event)">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 font-mono">
+                                    <div>
+                                        <label class="block text-xs text-slate-300 uppercase mb-1">Company / Organization *</label>
+                                        <input type="text" required class="w-full px-4 py-3 rounded bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-cyan-400" placeholder="e.g. Industrial Plant / UAV Firm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-300 uppercase mb-1">Business Email *</label>
+                                        <input type="email" required class="w-full px-4 py-3 rounded bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-cyan-400" placeholder="name@company.com">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 font-mono">
+                                    <div>
+                                        <label class="block text-xs text-slate-300 uppercase mb-1">Sector</label>
+                                        <select class="w-full px-4 py-3 rounded bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-cyan-400">
+                                            <option>Industrial Manufacturing / Bottling</option>
+                                            <option>UAV / Autonomous Platform Development</option>
+                                            <option>Aeronautical / Defense Maintenance</option>
+                                            <option>Mining / Energy / Infrastructure</option>
+                                            <option>Other Technical Project</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-300 uppercase mb-1">Target Timeline</label>
+                                        <select class="w-full px-4 py-3 rounded bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-cyan-400">
+                                            <option>Immediate (< 30 Days)</option>
+                                            <option>Short-Term (1 - 3 Months)</option>
+                                            <option>Remote Contractual Assignment</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-6 font-mono">
+                                    <label class="block text-xs text-slate-300 uppercase mb-1">Project Scope & Specifications *</label>
+                                    <textarea id="form-message" required rows="5" class="w-full px-4 py-3 rounded bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-cyan-400" placeholder="Describe plant equipment breakdown, CMMS requirements, or UAV sensor integration needs..."></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full py-3.5 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs uppercase font-mono tracking-wider transition-all glow-cyan">
+                                    Submit Proposal Request <i class="fa-solid fa-paper-plane ml-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-8 font-mono">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <p class="text-xs font-bold text-white uppercase">Bachir Cherif Oualid</p>
+                <p class="text-[10px] text-slate-400">Industrial, Aeronautical and UAV Engineer</p>
+            </div>
+            
+            <p class="text-[10px] text-slate-500">
+                © 2026 Bachir Cherif Oualid. Host ready for GitHub Pages (`index.html`).
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function filterDomain(domain) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.domain-card');
+            cards.forEach(card => {
+                if (domain === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.classList.contains(domain)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            let hasCustomUav = false;
+
+            if (document.getElementById('item-audit').checked) total += 70000;
+            if (document.getElementById('item-training').checked) total += 45000;
+            if (document.getElementById('item-sop').checked) total += 40000;
+            if (document.getElementById('item-gmao').checked) total += 80000;
+            if (document.getElementById('item-uav').checked) hasCustomUav = true;
+
+            const totalDisplay = document.getElementById('calculated-total');
+            if (total === 0 && !hasCustomUav) {
+                totalDisplay.innerText = "0 DZD";
+            } else if (total > 0 && hasCustomUav) {
+                totalDisplay.innerText = total.toLocaleString() + " DZD + Custom UAV Scope";
+            } else if (hasCustomUav) {
+                totalDisplay.innerText = "Custom UAV Scope";
+            } else {
+                totalDisplay.innerText = total.toLocaleString() + " DZD";
+            }
+        }
+
+        function transferEstimateToContact() {
+            const audit = document.getElementById('item-audit').checked;
+            const training = document.getElementById('item-training').checked;
+            const sop = document.getElementById('item-sop').checked;
+            const gmao = document.getElementById('item-gmao').checked;
+            const uav = document.getElementById('item-uav').checked;
+
+            let selections = [];
+            if (audit) selections.push("Industrial Maintenance Technical Audit");
+            if (training) selections.push("Technical Staff Training");
+            if (sop) selections.push("SOP/OPL Deliverable Pack");
+            if (gmao) selections.push("GMAO / CMMS Implementation");
+            if (uav) selections.push("UAV Command Control & Radar Integration");
+
+            const messageBox = document.getElementById('form-message');
+            const totalText = document.getElementById('calculated-total').innerText;
+
+            if (selections.length > 0) {
+                messageBox.value = `Selected Deliverable Estimate (${totalText}):\n- ` + selections.join('\n- ') + `\n\nSpecific Project Details & Scope: `;
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Please select at least one service deliverable from the estimator list above first.');
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden');
+            document.getElementById('b2b-contact-form').reset();
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
